@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Website Summarizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .summary-box {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .spinner {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #4CAF50;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .download-btn:hover {
+            background: #1976D2;
+        }
+
+    </style>
+
+    <script>
+        function showSpinner() {
+            document.getElementById("spinner").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h1>AI Website Summarizer</h1>
+
+    <form method="POST" onsubmit="showSpinner()">
+
+        <label>Enter Website URL:</label>
+        <input type="text" name="url" required>
+
+        <label>Select Summary Type:</label>
+        <select name="summary_type">
+            <option value="short">Short</option>
+            <option value="detailed">Detailed</option>
+            <option value="bullets">Bullet Points</option>
+        </select>
+
+        <label>Select Model:</label>
+        <select name="model_name">
+            <option value="llama-3.1-8b-instant">Llama 3.1 8B (Fast)</option>
+            <option value="llama-3.3-70b-versatile">Llama 3.3 70B (Advanced)</option>
+            <option value="openai/gpt-oss-20b">GPT-OSS 20B</option>
+            <option value="openai/gpt-oss-120b">GPT-OSS 120B</option>
+        </select>
+
+        <button type="submit">Generate Summary</button>
+    </form>
+
+    <div id="spinner" class="spinner">
+        <div class="loader"></div>
+        <p>Generating summary...</p>
+    </div>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if summary %}
+        <div class="summary-box">
+            <h3>Summary Output</h3>
+            {{ summary }}
+            
+            {% if response_time %}
+                <p><strong>Response Time:</strong> {{ response_time }} seconds</p>
+            {% endif %}
+
+            {% if download_file %}
+                <a class="download-btn" href="/download/{{ download_file }}">
+                    Download as Word (.docx)
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
