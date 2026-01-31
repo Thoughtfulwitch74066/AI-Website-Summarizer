@@ -143,4 +143,4 @@ http://localhost:5000
 ## 👨‍💻 Author
 
 Rohan Sreeharsha  
-Computer Science (Data Science)
+
