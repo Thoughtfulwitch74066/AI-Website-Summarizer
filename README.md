@@ -1,7 +1,7 @@
 # 🚀 AI Website Summarizer
-<br>
-https://ai-website-summarizer.onrender.com/
 
+https://ai-website-summarizer.onrender.com/
+<br>
 A production-ready AI-powered web application that extracts structured content from websites and generates intelligent summaries using multiple Large Language Models (LLMs) via Groq APIs.
 
 This project demonstrates backend engineering, structured web scraping, LLM integration, Docker containerization, and production-aware application design.
